@@ -1,4 +1,3 @@
-<script>
 // Pass Page Dependencies To GA
 if (window.performance) { // Performance Supported
   var resources=performance.getEntriesByType("resource"),resourceVar='',resourceValue=0,resourceLabel={{Page Navigation}};
@@ -17,4 +16,3 @@ if (window.performance) { // Performance Supported
     }
   }
 }
-</script>
