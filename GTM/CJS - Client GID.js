@@ -10,7 +10,7 @@ function(){ // Get Client GID (24hr clientId)
 	if(typeof ga==="function"){	// GA Is Declared
 		var _GAobj=ga.getAll();	// Load Tracker Objects
 		if(_GA['env']==-1){	// Find Matching Tracker
-			for (i=0;i<=_GAobj.length;i++){	// Find Matching TrackingId
+			for (i=0;i<=(_GAobj.length-1);i++){	// Find Matching TrackingId
 				if(_GAobj[i].get('trackingId')==_GA['from']){_GA['env']=i;break;};
 			}
 		}; // Returning Valid GA Reference 
