@@ -13,8 +13,8 @@ function(){ // Get Client GID (24hr clientId)
 			for (i=0;i<=_GAobj.length;i++){	// Find Matching TrackingId
 				if(_GAobj[i].get('trackingId')==_GA['from']){_GA['env']=i;break;};
 			}
-		}; // Now Return
-		if(_GA['env']>-1){	// Has Valid Tracker Index
+		}; // Returning Valid GA Reference 
+		if(_GA['env']>-1){	// Has Valid Tracking Id
 			return _GAobj[_GA['env']].get(_GA['name']); // Get Client Id
 		}
 	}
