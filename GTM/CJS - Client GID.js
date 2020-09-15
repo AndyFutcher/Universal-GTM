@@ -4,8 +4,23 @@ function(){ // Get Client GID (24hr clientId)
 		,get:"_gid"
 		,name:"_gid"	// cookieName="_gid"
 		,from:"{{LT - Tracking ID}}"	// TrackingId
+		,cache:true	// Session Storage Cache
 		,gid:""	// Placeholder
 	};
+
+	// Load From Session Cache (Performance Mode)
+	if(	// Enabled?
+		  (_GA['cache']) // Use Session Storage
+		&&(typeof window.sessionStorage==="object")	//
+	){	// Is Valid!
+		_GA['gid']=sessionStorage.getItem(_GA['name']);
+		if( // Validate Client GID
+			  (typeof _GA['gid']=="string") // Is Set
+			&&(_GA['gid'].length>=20) // Meets Minimum Length
+		){ // Is Valid!
+			return _GA['gid'];
+		}
+	}
 
 	// Find Google Analytics Objects
 	if(typeof ga==="function"){	// GA Is Declared
@@ -21,6 +36,14 @@ function(){ // Get Client GID (24hr clientId)
 		}
 	}
 
-	// Return (last)
-	return _GA['gid'];
+	// Check If We Found Valid Client ID
+	if( // Validate Client Id
+		  (typeof _GA['gid']=="string") // Is Set
+		&&(_GA['gid'].length>=20) // Meets Minimum Length
+	){ // Is Valid!
+		if(typeof window.sessionStorage==="object"){	// Is Availible
+			if(_GA['cache']){sessionStorage.setItem(_GA['name'],_GA['gid']);};	// Save Cache (if True)
+		}; // Return GID
+		return _GA['gid'];
+	}
 }
