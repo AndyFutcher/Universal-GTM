@@ -1,7 +1,7 @@
 /* ============================================================================
     SuccessEvents is a free and open-source data layer designed to streamline
     & enhance the accuracy of your website digital analytics and PWA tracking.
-    Copyright (C) 2020  Andy Futcher
+    Copyright (C) 2020 Andy Xelancer Futcher
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
@@ -15,6 +15,9 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+	See more documentation at SuccessEvents.dev, for more information please
+	contact me at andy@successevents.dev
 ============================================================================ */
 
 function(){ // Converting Percent Integer to Milliseconds (Timing Events)
