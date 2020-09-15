@@ -4,7 +4,7 @@ function(){ // Get Client GID (24hr clientId)
 		,get:"_gid"
 		,name:"_gid"	// cookieName="_gid"
 		,from:"{{LT - Tracking ID}}"	// TrackingId
-		,cache:true	// Session Storage Cache
+		,cache:true	// Session Cache (Performance)
 		,gid:""	// Placeholder
 	};
 
@@ -41,8 +41,8 @@ function(){ // Get Client GID (24hr clientId)
 		  (typeof _GA['gid']=="string") // Is Set
 		&&(_GA['gid'].length>=20) // Meets Minimum Length
 	){ // Is Valid!
-		if(typeof window.sessionStorage==="object"){	// Is Availible
-			if(_GA['cache']){sessionStorage.setItem(_GA['name'],_GA['gid']);};	// Save Cache (if True)
+		if(typeof window.sessionStorage==="object"){	// Storage Is Availible
+			if(_GA['cache']){sessionStorage.setItem(_GA['name'],_GA['gid']);};	// Save Reported Client GID (if Eanbled)
 		}; // Return GID
 		return _GA['gid'];
 	}
