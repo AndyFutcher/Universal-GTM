@@ -20,7 +20,24 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-// Declare Before Unload Events
+
+// Bind Listeners
 window.addEventListener("beforeunload", function(event){
-	dataLayer.push({'event':'beforeunload'});
-});
+  dataLayer.push({'event':'beforeunload'});
+}); // Capture Desktop Mouse Movement
+document.addEventListener("mousemove", function(event){
+	dataLayer.push({'event':'interaction'});
+	document.addEventListener("mouseleave", function(event){
+		dataLayer.push({'event':'lostfocus'});
+	},{once:true});  // Fire Only Once
+},{once:true,passive:true});  // Fire Only Once
+// Capture Mobile Movement
+document.addEventListener("touchstart", function(event){
+	dataLayer.push({'event':'interaction'});
+	document.addEventListener("touchcancel", function(event){
+		dataLayer.push({'event':'lostfocus'});
+	},{once:true});  // Fire Only Once
+},{once:true});  // Fire Only Once
+
+// Let GTM Know We Have Bound Everything!
+dataLayer.push({'event':'onload'});

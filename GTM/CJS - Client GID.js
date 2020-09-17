@@ -22,50 +22,50 @@
 
 function(){ // Get Client GID (24hr clientId)
 	// Declare Environment
-	var _GA={env:-1	// -1=unknown,0=default,1+=known secondary
+	var _GID={env:-1 // -1=unknown,0=default,1+=known secondary
 		,get:"_gid"
-		,name:"_gid"	// cookieName="_gid"
-		,from:"{{LT - Tracking ID}}"	// TrackingId
-		,cache:true	// Session Cache (Performance)
-		,gid:""	// Placeholder
+		,name:"_gid" // cookieName="_gid"
+		,from:"{{LT - Tracking ID}}" // TrackingId
+		,cache:true // Session Cache (Performance)
+		,gid:"" // GID Placeholder
 	};
 
 	// Load From Session Cache (Performance Mode)
 	if(	// Enabled?
-		  (_GA['cache']) // Use Session Storage
+		  (_GID['cache']) // Use Session Storage
 		&&(typeof window.sessionStorage==="object")	//
 	){	// Is Valid!
-		_GA['gid']=sessionStorage.getItem(_GA['name']);
+		_GID['gid']=sessionStorage.getItem(_GID['name']);
 		if( // Validate Client GID
-			  (typeof _GA['gid']=="string") // Is Set
-			&&(_GA['gid'].length>=20) // Meets Minimum Length
-		){ // Is Valid!
-			return _GA['gid'];
+			  (typeof _GID['gid']=="string") // Is Set
+			&&(_GID['gid'].length>=20) // Meets Minimum Length
+		){	// Is Valid!
+			return _GID['gid'];
 		}
 	}
 
 	// Find Google Analytics Objects
-	if(typeof ga==="function"){	// GA Is Declared
-		var _GAobj=ga.getAll();	// Load Tracker Objects
-		if(_GA['env']==-1){	// Find Matching Tracker
-			var _GAlen=_GAobj.length-1;	// Tracker Count
-			for (i=0;i<=_GAlen;i++){	// Find TrackingId
-				if(_GAobj[i].get('trackingId')==_GA['from']){_GA['env']=i;break;};
+	if(typeof ga==="function"){ // GA Is Declared
+		var _GIDobj=ga.getAll(); // Load Tracker Objects
+		if(_GID['env']==-1){ // Find Matching Tracker
+			var _GIDlen=_GIDobj.length-1; // Tracker Count
+			for (i=0;i<=_GIDlen;i++){ // Find TrackingId
+				if(_GIDobj[i].get('trackingId')==_GID['from']){_GID['env']=i;break;};
 			}
 		}; // Returning Valid GA Reference
-		if(_GA['env']>-1){	// Has Valid Tracking Id
-			_GA['gid']=_GAobj[_GA['env']].get(_GA['get']); // Get Client Id
+		if(_GID['env']>-1){ // Has Valid Tracking Id
+			_GID['gid']=_GIDobj[_GID['env']].get(_GID['get']); // Get Client Id
 		}
 	}
 
 	// Check If We Found Valid Client ID
 	if( // Validate Client Id
-		  (typeof _GA['gid']=="string") // Is Set
-		&&(_GA['gid'].length>=20) // Meets Minimum Length
-	){ // Is Valid!
-		if(typeof window.sessionStorage==="object"){	// Storage Is Availible
-			if(_GA['cache']){sessionStorage.setItem(_GA['name'],_GA['gid']);};	// Save Reported Client GID (if Eanbled)
+		  (typeof _GID['gid']=="string") // Is Set
+		&&(_GID['gid'].length>=20) // Meets Minimum Length
+	){	// Is Valid!
+		if(typeof window.sessionStorage==="object"){ // Storage Is Availible
+			if(_GID['cache']){sessionStorage.setItem(_GID['name'],_GID['gid']);}; // Save Reported Client GID (if Eanbled)
 		}; // Return GID
-		return _GA['gid'];
+		return _GID['gid'];
 	}
 }
