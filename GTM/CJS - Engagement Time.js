@@ -20,6 +20,6 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Page Time in Seconds
-	if (window.performance) {return Math.round(performance.now())/1000;}
+function(){ // Page Time in Milliseconds
+	if (typeof window.performance=="object") {return Math.round(performance.now());}
 }

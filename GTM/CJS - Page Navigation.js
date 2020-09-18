@@ -21,5 +21,17 @@
 ============================================================================ */
 
 function(){ // Returns Navigation Type (navigate, reload, back_forward)
-	if (window.performance) {return performance.getEntriesByType("navigation")[0].type;}
+	if ((typeof window.performance=="object")&&(window.performance!==null)) { // Performance Is Ready
+		if (typeof performance.navigation=="object") { // Navigation Is Declared
+			if (typeof performance.navigation.type=="number") { // We Have An Answer
+				switch(performance.navigation.type){case "0": return 'navigate';
+				break;case "1": return 'reload';
+				break;case "2": return 'back_forward';
+				};
+			}
+		}; // Fallback when Performance.Navigation depreciated
+		if (typeof performance.getEntriesByType=="function") { // PerformanceNavigationTiming Supported
+			return performance.getEntriesByType("navigation")[0].type.toLowerCase();
+		}
+	}
 }
