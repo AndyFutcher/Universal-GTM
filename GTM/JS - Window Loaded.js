@@ -46,15 +46,15 @@ dataLayer.push({'event':'onload'});
 if ((typeof window.performance=="object")&&(window.performance!==null)) {
 	if (typeof performance.timing=="object") { // Timing Is Declared
 		if (typeof performance.timing.loadEventEnd=="number") { // We Have An Answer
-			var onloaded=setTimeout(function(){
-				if(performance.timing.loadEventEnd){dataLayer.push({'event':'onloaded'});clearTimeout(onloaded);};
+			var onloaded=setInterval(function(){
+				if(performance.timing.loadEventEnd){dataLayer.push({'event':'onloaded'});clearInterval(onloaded);};
 			},1000); // Check for loadEventEnd Every Second
 		}
 	}; // Fallback when Performance.Navigation depreciated
 	if (typeof onloaded==="undefined") { // Timing Is Declared
 		if (typeof performance.getEntriesByType=="function") { // PerformanceNavigationTiming Supported
-			var onloaded=setTimeout(function(){ // Set Timer
-				if(performance.getEntriesByType("navigation")[0].loadEventEnd){dataLayer.push({'event':'onloaded'});clearTimeout(onloaded);};
+			var onloaded=setInterval(function(){ // Set Timer
+				if(performance.getEntriesByType("navigation")[0].loadEventEnd){dataLayer.push({'event':'onloaded'});clearInterval(onloaded);};
 			},1000); // Check for loadEventEnd Every Second
 		}else{ // No onLoaded Detection Possible, Fire Anyway!
 			dataLayer.push({'event':'onloaded'});
