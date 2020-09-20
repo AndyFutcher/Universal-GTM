@@ -25,8 +25,8 @@ function(){ // Collect Google Analytics Client Id (Heriachy)
 	var _GA={cache:true // Session Cache (Performance)
 		,env:-1 // -1=unknown,0=default,1+=known secondary
 		,get:"clientId"
-		,name:"{{SET - Cookie Name - Client ID}}" // cookieName="_ga"
-		,from:"{{LT - Tracking ID}}" // TrackingId
+		,name:"{{Default - Cookie - Client ID}}" // cookieName="_ga"
+		,from:"{{Tracking ID}}" // TrackingId
 		,sscid:"" // Cached Placeholder
 		,gacid:"" // GA Placeholder
 		,lscid:"" // LocalStorage Placeholder

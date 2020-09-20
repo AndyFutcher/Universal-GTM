@@ -25,7 +25,7 @@ function(){ // Get Client GID (24hr clientId)
 	var _GID={env:-1 // -1=unknown,0=default,1+=known secondary
 		,get:"_gid"
 		,name:"_gid" // cookieName="_gid"
-		,from:"{{LT - Tracking ID}}" // TrackingId
+		,from:"{{Tracking ID}}" // TrackingId
 		,cache:true // Session Cache (Performance)
 		,gid:"" // GID Placeholder
 	};

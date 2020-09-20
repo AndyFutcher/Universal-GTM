@@ -22,7 +22,7 @@
 
 // Pass Page Dependencies To GA
 if (window.performance) { // Performance Supported
-	var resources=performance.getEntriesByType("resource"),resourceVar='',resourceValue=0,resourceLabel={{Page Navigation}};
+	var resources=performance.getEntriesByType("resource"),resourceVar='',resourceValue=0,resourceLabel={{Navigation Type}};
 	for (var resource=0;resource<resources.length;resource++) {
 		resourceVar=resources[resource].name.split(';')[0]; // Strip Code/BASE64
 		resourceVar=resourceVar.split('?')[0]; // Strip Parameters
