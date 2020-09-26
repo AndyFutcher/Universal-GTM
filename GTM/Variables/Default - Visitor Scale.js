@@ -20,22 +20,29 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Collect Page Level Tracking ID
-	var _GAobj=document.head.querySelector('meta[property="ga:trackingId"]');
-	// Try Metadata Value
-	if((typeof _GAobj=="object")&&(_GAobj!==null)){ // Has Meta Tag
-		if(typeof _GAobj.content=="string"){ // Has Meta Tag
-			var _GAid=_GAobj.content.toUpperCase();
-		}
-	}
+function(){ // Visitor Scale
+	-90:bad actor,-30:unknown browser,-20:unknown bot,-10:known bot,-1:unknown,0:hit,1:viewer,5:visitor,10:user,20:active user,30:marketable,40:identified,50:customer,60:up-sellable,70:cross-sellable,80:loyal,90:advocate,100:employee
+	//'-90':"bad actor",'-30':"blocked browser",'-20':"unknown bot",'-10':"known bot",'-1':"unknown",'0':"hit",'1':"viewer",'5':"visitor",'10':"user",'20':"active user",'30':"marketable",'40':"identified",'50':"customer",'60':"up-sellable",'70':"cross-sellable",'80':"loyal",'90':"advocate",'100':"employee"
+	/* Declare Scale Values
+	var _VSobj={
+		 '-90':"bad actor"
+		,'-30':"unknown browser"
+		,'-20':"unknown bot"
+		,'-10':"known bot"
+		,'-1':"unknown"
+		,'0':"hit"
+		,'1':"viewer"
+		,'5':"visitor"
+		,'10':"user"
+		,'20':"active user"
+		,'30':"marketable"
+		,'40':"identified"
+		,'50':"customer"
+		,'60':"up-sellable"
+		,'70':"cross-sellable"
+		,'80':"loyal"
+		,'90':"advocate"
+		,'100':"employee"
+	}; */
 
-	// Lets Resolve TID From Sources
-	if(	// Valid UA-
-		  (typeof _GAid=="string") // Is Set
-		&&(_GAid.substr(0,3)=="UA-") // Starts with UA-
-	){	// Is Valid & Return
-		return _GAid;
-	}else{ // Else Fallback (Call Variable|Case Undefined)
-		return undefined;
-	}
 }
