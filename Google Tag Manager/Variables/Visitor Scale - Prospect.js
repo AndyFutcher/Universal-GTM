@@ -24,7 +24,7 @@ function(){ // Resolve Visitor Scale
 	var _VS={ver:"{{Container Version}}" // Container Version
 		,name:{{Cookie - Visitor Scale}} // ~"_gaq"
 		,scale:parseInt({{Visitor Scale}}) // Scale Placeholder, Default to Previous
-		,target:-2 // New Target Scale
+		,target:30 // New Target Scale
 		,persist:true // Use Local Storage (FALSE disables persistence)
 		,local:0 // Persistenty Stored Scale
 		,define:"employee" // Default for Scale Name

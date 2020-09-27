@@ -21,9 +21,9 @@
 ============================================================================ */
 
 function(){ // Resolve Visitor Scale
-	var _VS={ver:{{Container Version}} // Container Version
+	var _VS={ver:"{{Container Version}}" // Container Version
 		,name:{{Cookie - Visitor Scale}} // ~"_gaq"
-		,scale:{{Visitor Scale}} // Scale Placeholder, Default to Previous
+		,scale:parseInt({{Visitor Scale}}) // Scale Placeholder, Default to Previous
 		,target:10 // New Target Scale
 		,persist:true // Use Local Storage (FALSE disables persistence)
 		,local:0 // Persistenty Stored Scale
@@ -49,15 +49,22 @@ function(){ // Resolve Visitor Scale
 		&&(typeof window.localStorage==="object") // Is Availible
 		&&(window.localStorage!==null) // No Weird Declarations
 	){	// LocalStorage Is Availible
-		_VS['local']=localStorage.getItem(_VS['name']); // Query Local
-		// Resolve Local vs Layer Priv.
-		if(Math.abs(_VS['scale'])<Math.abs(_VS['local'])){ // LocalStorage Escalates
-			_VS['scale']=_VS['local']; // Replace Previous Scale with Local
-		}
+		_VS['local']=parseInt(localStorage.getItem(_VS['name'])); // Query Local
 	}else{_VS['persist']=false; // LocalStorage Disabled
 	}
 
+	// Special Conditions...
+	if((_VS['scale']==0)&&(_VS['local']==10)){ // Found Returning "User"
+		_VS['target']=20; // Then Is "Active User"
+	};
+
+	// Resolve Local vs Layer Privileges
+	if(Math.abs(_VS['scale'])<Math.abs(_VS['local'])){ // LocalStorage Escalates
+		_VS['scale']=_VS['local']; // Replace Previous Scale with Local
+	}
+
 	// Check For Scale Escalation
+	_VS['target']=parseInt(_VS['target']); // Resolve Target Data Type
 	if(Math.abs(_VS['scale'])<Math.abs(_VS['target'])){ // Is Escalated
 		if((_VS['persist'])){ // LocalStorage Is Availible
 			localStorage.setItem(_VS['name'],_VS['target']); // Store Target Updated
