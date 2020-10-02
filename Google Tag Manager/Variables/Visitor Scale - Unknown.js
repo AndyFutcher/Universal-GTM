@@ -22,7 +22,7 @@
 
 function(){ // Resolve Visitor Scale
 	var _VS={ver:"{{Container Version}}" // Container Version
-		,name:{{Cookie - Visitor Scale}} // ~"_gaq"
+		,name:{{Defaut - Cookie - Visitor Scale}} // ~"_gaq"
 		,scale:parseInt({{Visitor Scale}}) // Scale Placeholder, Default to Previous
 		,target:0 // New Target Scale
 		,persist:true // Use Local Storage (FALSE disables persistence)

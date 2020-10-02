@@ -20,18 +20,33 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Returns Navigation Type (navigate, reload, back_forward)
+function(){ // Returns Navigation Type (landing, navigate, reload, back_forward)
+	_NT={ref:"{{Referrer}}" // Any Referrer
+		,host:"{{Hostname}}" // Hostname
+		,type:"navigate" // Output & Default
+	};
+
 	if ((typeof window.performance=="object")&&(window.performance!==null)) { // Performance Is Ready
 		if (typeof performance.navigation=="object") { // Navigation Is Declared
 			if (typeof performance.navigation.type=="number") { // We Have An Answer
-				switch(performance.navigation.type){case "0": return 'navigate';
-				break;case "1": return 'reload';
-				break;case "2": return 'back_forward';
+				switch(performance.navigation.type){case "0": _NT['type']='navigate';
+				break;case "1": _NT['type']='reload';
+				break;case "2": _NT['type']='back_forward';
 				};
 			}
 		}; // Fallback when Performance.Navigation depreciated
 		if (typeof performance.getEntriesByType=="function") { // PerformanceNavigationTiming Supported
-			return performance.getEntriesByType("navigation")[0].type.toLowerCase();
+			_NT['type']=performance.getEntriesByType("navigation")[0].type.toLowerCase();
 		}
 	}
+
+	// Check for Overrides
+	switch(_NT['type']){case "":case false:case NULL:case undefined: _NT['type']='navigate'; // Empty Override
+	break;case "navigate": // Is Navigation Insight
+		_NT['host']=_NT['host'].replace('www.',""); // Excude WWW Prefix from Test
+		if(_NT['ref'].search(_NT['host'])==-1){return 'landing';}; // No Matching Referrer
+	}
+
+	// Return Output
+	return _NT['type'];
 }

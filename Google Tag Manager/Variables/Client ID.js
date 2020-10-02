@@ -25,12 +25,13 @@ function(){ // Collect Google Analytics Client Id (Heriachy)
 	var _GA={cache:true // Session Cache (Performance)
 		,env:-1 // -1=unknown,0=default,1+=known secondary
 		,get:"clientId"
-		,name:"{{Cookie - Client ID}}" // cookieName="_ga"
+		,name:"{{Default - Cookie}}" // cookieName="_ga"
 		,from:"{{Tracking ID}}" // TrackingId
 		,sscid:"" // Cached Placeholder
 		,gacid:"" // GA Placeholder
 		,lscid:"" // LocalStorage Placeholder
 		,cid:"" // Cookie Placeholder
+		,sync:{{Session Start}} // Must Sync
 	},_GID={cache:true // Session Cache (Performance)
 		,get:"_gid"
 		,name:"_gid" // cookieName="_gid"
@@ -46,7 +47,9 @@ function(){ // Collect Google Analytics Client Id (Heriachy)
 		if( // Validate Client GID
 			  (typeof _GA['sscid']=="string") // Is Set
 			&&(_GA['sscid'].length>=20) // Meets Minimum Length
-		){	// Is Valid!
+		){	// Is Valid; Update cookieUpdate
+			if(_GA['sync']){dataLayer.push({'session-start':false});}; // Disable Cookie Updates For This Session (Performance)
+			// Return Session Client ID
 			return _GA['sscid'];
 		}
 	}

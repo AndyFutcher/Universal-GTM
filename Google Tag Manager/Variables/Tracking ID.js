@@ -22,6 +22,7 @@
 
 function(){ // Collect Page Level Tracking ID
 	var _GAobj=document.head.querySelector('meta[property="ga:trackingId"]');
+
 	// Try Metadata Value
 	if((typeof _GAobj=="object")&&(_GAobj!==null)){ // Has Meta Tag
 		if(typeof _GAobj.content=="string"){ // Has Meta Tag
