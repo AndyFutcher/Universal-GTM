@@ -23,30 +23,38 @@
 function(){ // Returns Navigation Type (landing, navigate, reload, back_forward)
 	_NT={ref:"{{Referrer}}" // Any Referrer
 		,host:"{{Hostname}}" // Hostname
-		,type:"navigate" // Output & Default
+		,nav:"navigate" // Output & Default
 	};
 
 	if ((typeof window.performance=="object")&&(window.performance!==null)) { // Performance Is Ready
 		if (typeof performance.navigation=="object") { // Navigation Is Declared
 			if (typeof performance.navigation.type=="number") { // We Have An Answer
-				switch(performance.navigation.type){case "0": _NT['type']='navigate';
-				break;case "1": _NT['type']='reload';
-				break;case "2": _NT['type']='back_forward';
+				switch(parseInt(performance.navigation.type)){case 1: _NT['nav']='reload';
+				break;case 2: _NT['nav']='back_forward';
+				break;case 0:default: _NT['nav']='navigate';
 				};
 			}
 		}; // Fallback when Performance.Navigation depreciated
 		if (typeof performance.getEntriesByType=="function") { // PerformanceNavigationTiming Supported
-			_NT['type']=performance.getEntriesByType("navigation")[0].type.toLowerCase();
+			if (typeof performance.getEntriesByType("navigation")[0]=="object") { // Navigation Type Supported
+				_NT['nav']=performance.getEntriesByType("navigation")[0].type.toLowerCase(); // Has Value
+			}else{ // If Object Does Not Exist Then Navigate
+				_NT['nav']='navigate';
+			}
 		}
 	}
 
+	// Fallbacks
+	switch(_NT['nav']){case "":case false:case null:case undefined: _NT['nav']='navigate'; // Empty Override
+	break;default: // Ignore
+	}
+
 	// Check for Overrides
-	switch(_NT['type']){case "":case false:case NULL:case undefined: _NT['type']='navigate'; // Empty Override
-	break;case "navigate": // Is Navigation Insight
+	if(_NT['nav']=="navigate"){ // Is Navigation Insight
 		_NT['host']=_NT['host'].replace('www.',""); // Excude WWW Prefix from Test
-		if(_NT['ref'].search(_NT['host'])==-1){return 'landing';}; // No Matching Referrer
+		if(_NT['ref'].search(_NT['host'])==-1){_NT['nav']='landing';}; // No Matching Referrer
 	}
 
 	// Return Output
-	return _NT['type'];
+	return _NT['nav'];
 }

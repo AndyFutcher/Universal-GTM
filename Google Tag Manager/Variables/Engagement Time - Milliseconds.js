@@ -22,7 +22,7 @@
 
 function(){ // Page Time in Milliseconds
 	if (typeof window.performance=="object") { // Performance Declared
-		_ET={now:performance.now() // Page Time
+		_ET={now:window.performance.now() // Page Time
 			,offset:{{Engagement Time - Offset}} // Any Offset Timer
 			,div:1 // Divisor (1=ms,1000=seconds)
 		};
@@ -33,10 +33,10 @@ function(){ // Page Time in Milliseconds
 
 		// Check for Offset Timer
 		if(_ET['now']>=_ET['offset']){ // Has Valid Offset
-			return Math.round((_ET['now']-_ET['offset'])/div);
+			return ((_ET['now']-_ET['offset'])/_ET['div']);
 		}
 
 		// Return Only NOW
-		return Math.round(_ET['now']/div);
+		return (_ET['now']/_ET['div']);
 	}
 }

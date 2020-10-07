@@ -22,18 +22,13 @@
 
 function(){ // Resolve Visitor Scale
 	var _VS={ver:"{{Container Version}}" // Container Version
-		,name:{{Defaut - Cookie - Visitor Scale}} // ~"_gaq"
+		,name:"{{Default - Cookie - Visitor Scale}}" // ~"_gaq"
 		,scale:parseInt({{Visitor Scale}}) // Scale Placeholder, Default to Previous
 		,target:20 // New Target Scale
-		,persist:true // Use Local Storage (FALSE disables persistence)
+		,persist:{{Default - Local Storage - Enabled}} // Use Session Storage (FALSE disables persistence)
 		,local:0 // Persistenty Stored Scale
-		,define:"employee" // Default for Scale Name
+		,define:"internal" // Default for Scale Name
 	};
-
-	// Check For Overrides (staff member)
-	if(_VS['ver']=="QUICK_PREVIEW"){
-		return _VS['define'];
-	}
 
 	// Parse Scale Values
 	var _VSobj="{{Default - Visitor Scale}}";_VSobj=_VSobj.split(','); // Collect & Explode Scale
@@ -54,8 +49,12 @@ function(){ // Resolve Visitor Scale
 	}
 
 	// Special Conditions...
-	if((_VS['scale']==0)&&(_VS['local']==10)){ // Found Returning "User"
+	if(_VS['ver']=="QUICK_PREVIEW"){ // Found Returning "User"
+		_VS['target']=-100; // Then Is "Internal"
+	}else if((_VS['scale']==0)&&(_VS['local']==10)){ // Found Returning "User"
 		_VS['target']=20; // Then Is "Active User"
+	}else if((_VS['scale']==40)&&(_VS['local']==60)){ // Found Requoted Customer
+		_VS['target']=70; // Then Is "In Market"
 	};
 
 	// Resolve Local vs Layer Privileges

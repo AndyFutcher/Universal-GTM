@@ -21,14 +21,15 @@
 ============================================================================ */
 
 function(){ // Visitor Scale
-	-90:bad actor,-30:unknown browser,-10:unknown bot,-2:known bot,0:unknown,1:hit,2:viewer,5:visitor,10:user,20:active user,30:prospect,40:quotation,50:qualified,60:customer,70:loyal,80:advocate,90:in market,100:employee
+	-100:internal,-99:bad actor,-39:unknown browser,-19:unknown bot,-9:known bot,0:unknown,1:hit,2:viewer,5:visitor,10:user,20:active user,30:prospect,40:quotation,50:qualified,60:customer,70:in market,80:loyal,90:advocate,100:influencer
 	//'-90':"bad actor",'-30':"blocked browser",'-20':"unknown bot",'-10':"known bot",'-1':"unknown",'0':"hit",'1':"viewer",'5':"visitor",'10':"user",'20':"active user",'30':"marketable",'40':"identified",'50':"customer",'60':"up-sellable",'70':"cross-sellable",'80':"loyal",'90':"advocate",'100':"employee"
 	/* Declare Scale Values
 	VSscale={
-		 '-90':"bad actor"
-		,'-30':"unknown browser"
-		,'-10':"unknown bot"
-		,'-2':"known bot"
+		 '-100':"internal"  // or Staff/Employee/Employer
+		 '-99':"bad actor"
+		,'-39':"unknown browser"
+		,'-19':"unknown bot"
+		,'-9':"known bot"
 		,'0':"unknown"
 		,'1':"hit"
 		,'2':"viewer"
@@ -39,10 +40,10 @@ function(){ // Visitor Scale
 		,'40':"quotation"
 		,'50':"qualified"
 		,'60':"customer"
-		,'70':"loyal"
-		,'80':"advocate"
-		,'90':"in market"
-		,'100':"employee"
+		,'70':"in market"
+		,'80':"loyal"
+		,'90':"advocate"
+		,'100':"influencer"
 	}; */
 
 }

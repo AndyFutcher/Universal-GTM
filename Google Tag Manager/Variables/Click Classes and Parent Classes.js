@@ -20,37 +20,16 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Checks for Persistent Visitor Scale QA
-	// Declare Environment
-	var _QA={set:"0"
-		,name:"_qa" // Record Name="_qa"
-		,persist:true // Enabled Persistence
-		,scale:"" // QA Scale Placeholder
+function(){ // Collect Parent and Element Classes
+	_CL={clicked: {{Click Element}}.className // The Clicked Element
+		,parent: {{Click Element}}.parentElement.className // ...and Its Parent
 	};
 
-	/* QA Visitor Scale
-	<=	-2		:unknown bot
-	=	-1		:known bot
-	=	0		:unknown
-	=	1-10	:visitor
-	=	11-49	:user
-	>=	50		:customer
-	*/
+	// Determine Valid Return
+    switch(typeof _CL['parent']){case "string": // Valid ClassName
+		return _CL['clicked']+' '+_CL['parent']; // Return Concatenated
+    };
 
-	// Load From Local Storage (for Persistent)
-	if(	// Enabled?
-		  (_QA['persist']) // Use Local Storage
-		&&(typeof window.localStorage==="object") // Is Availible
-	){	// Is Valid!
-		var _QA['scale']=localStorage.getItem(_QA['name']);
-		if( // Validate QA Scale
-			(typeof _QA['scale']=="string") // Is Set
-		){	// Is Valid!
-			return _QA['scale'];
-		}; // Is Valid!
-		if(_QA['persist']){localStorage.setItem(_QA['name'],_QA['set']);}; // Save Current QA Scale
-	}
-
-	// Return Set Value
-	return _GA['set'];
+	// No Other Variable Types Neccessary
+	return _CL['clicked']; // Return Click
 }

@@ -20,23 +20,6 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Page Time in Milliseconds
-	if (typeof window.performance=="object") { // Performance Declared
-		_ET={now:window.performance.now() // Page Time
-			,offset:{{Engagement Time - Offset}} // Any Offset Timer
-			,div:1000 // Divisor (1=ms,1000=seconds)
-		};
-
-		// Parse Values
-		_ET['now']=parseInt(_ET['now']);
-		_ET['offset']=parseInt(_ET['offset']);
-
-		// Check for Offset Timer
-		if(_ET['now']>=_ET['offset']){ // Has Valid Offset
-			return ((_ET['now']-_ET['offset'])/_ET['div']);
-		}
-
-		// Return Only NOW
-		return (_ET['now']/_ET['div']);
-	}
+function(){ // Convert Percent to Milliseconds
+	return parseInt({{Scroll Depth Threshold}})*1000;
 }

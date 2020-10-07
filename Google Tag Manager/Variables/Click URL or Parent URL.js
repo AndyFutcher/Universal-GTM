@@ -20,23 +20,18 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Page Time in Milliseconds
-	if (typeof window.performance=="object") { // Performance Declared
-		_ET={now:window.performance.now() // Page Time
-			,offset:{{Engagement Time - Offset}} // Any Offset Timer
-			,div:1000 // Divisor (1=ms,1000=seconds)
-		};
+function(){ // Collect Parent or Element HREF
+	_CL={clicked: {{Click Element}}.href // The Clicked Element
+		,parent: {{Click Element}}.parentElement.href // ...and Its Parent
+	};
 
-		// Parse Values
-		_ET['now']=parseInt(_ET['now']);
-		_ET['offset']=parseInt(_ET['offset']);
-
-		// Check for Offset Timer
-		if(_ET['now']>=_ET['offset']){ // Has Valid Offset
-			return ((_ET['now']-_ET['offset'])/_ET['div']);
-		}
-
-		// Return Only NOW
-		return (_ET['now']/_ET['div']);
+	// Determine Valid Return by Heirarchy
+    if(typeof _CL['clicked']=="string"){ // Has Valid Click Value
+		return _CL['clicked']; // Return Click Value
+    }else if(typeof _CL['parent']=="string"){ // Has Valid Parent Value
+		return _CL['parent']; // Return Parent Value
 	}
+
+	// Else Return Empty
+	return "";
 }

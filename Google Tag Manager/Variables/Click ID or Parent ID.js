@@ -20,6 +20,15 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Converting Percent Integer to Milliseconds (Timing Events)
-	return parseInt({{Scroll Depth Threshold}}*1000);
+function(){ // Collect Parent or Element Id
+	_CL={clicked: {{Click Element}}.id // The Clicked Element
+		,parent: {{Click Element}}.parentElement.id // ...and Its Parent
+	};
+
+	// Determine Valid Return by Heirarchy
+    if(typeof _CL['clicked']=="string"){ // Has Valid Click Value
+		return _CL['clicked']; // Return Click Value
+    }else if(typeof _CL['parent']=="string"){ // Has Valid Parent Value
+		return _CL['parent']; // Return Parent Value
+	}
 }
