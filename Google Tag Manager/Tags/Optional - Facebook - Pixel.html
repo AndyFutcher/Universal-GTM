@@ -1,0 +1,47 @@
+<script>
+/* ============================================================================
+    SuccessEvents is a free and open-source data layer designed to streamline
+    & enhance the accuracy of your website digital analytics and PWA tracking.
+    Copyright (C) 2020 Andy Xelancer Futcher
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+	See more documentation at SuccessEvents.dev, for more information please
+	contact me at andy@successevents.dev
+============================================================================ */
+
+// Facebook Pixel Code
+if(typeof window.fbq!="function"){ // Already Declared (or Initialising Too?)
+    !function(f,b,e,v,n,t,s) { // Nope, Declare Pixel Design (Minified After This Point To Match Facebook Design)
+        if(f.fbq)return; // If Already Declared Then Exit
+        n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}; // Call The fbq() Function To Populate The Queue
+        if(!f._fbq)f._fbq=n; // Create A Backup Copy
+        n.push=n; // Push Calls Itself
+        n.loaded=!0; // Loaded = TRUE
+        n.version='2.0'; // Version Number
+        n.queue=[]; // Declare Queue (even before Script Loaded)
+        t=b.createElement(e); // New Call Method
+        t.async=!0; // Asynchronous = TRUE
+        t.src=v; // "fbevents.js" Destination Path
+        s=b.getElementsByTagName(e)[0]; // Find First 'script' Element Under 'document'
+        s.parentNode.insertBefore(t,s) // Push To The Script Processed In Queue
+    }(window // Parent Node
+        ,document // Container Document
+        ,'script' // Call Method Element Type
+        ,'https://connect.facebook.net/en_US/fbevents.js' // API Controller URL
+    );
+    // Initialise Function Call
+    fbq('init',"{{Facebook App ID}}"); // Initialise Facebook App ID
+    fbq('track','PageView'); // Always Call A Simple PageView Event
+}; </script>

@@ -20,15 +20,6 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Collect Clicked Parent Rendered Text
-	switch({{Click Element}}.parentElement.tagName){ // Depends On Tag Type
-		case null: // Ignore Parent Node When Tag Matches These Types
-		case "HTML":
-		case "BODY":
-		case "IFRAME":
-			return {{Click Element}}.innerText;
-	break; // Else:
-		default: // Any Other Element Type Is Valid Parent
-			return {{Click Element}}.parentElement.innerText;
-	}
+function() { // Returns Unix Time (seconds since epoch) Including Milliseconds
+    return ((new Date()).getTime()) / 1000;
 }
