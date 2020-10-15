@@ -28,7 +28,7 @@ if (window.performance) { // Performance Supported
 		resourceVar=resources[resource].name.split(';')[0]; // Strip Code/BASE64
 		resourceVar=resourceVar.split('?')[0]; // Strip Parameters
 		resourceValue=resources[resource].responseEnd-resources[resource].startTime;
-		if (resourceValue>0) { // Not Cached (Dont Round)
+		if (resourceValue>20) { // Not Cached (Greater Than 20ms)
 			dataLayer.push({
 				 'event':'timing'
 				,'EventCategory':resources[resource].initiatorType

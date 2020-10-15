@@ -21,14 +21,35 @@
 ============================================================================ */
 
 function(){ // Collect Clicked Parent Rendered Text
-	switch({{Click Element}}.parentElement.tagName){ // Depends On Tag Type
-		case null: // Ignore Parent Node When Tag Matches These Types
-		case "HTML":
-		case "BODY":
-		case "IFRAME":
-			return {{Click Element}}.innerText;
-	break; // Else:
-		default: // Any Other Element Type Is Valid Parent
-			return {{Click Element}}.parentElement.innerText;
+	var _CLobj={{Click Element}}; // Store Clicked Object
+
+	if(	// Validate Object
+		  (typeof _CLobj=="object") // Is Declared
+		&&(typeof _CLobj.tagName=="string") // Has Tag Name
+	){	// Were Good To Query
+		switch(_CLobj.tagName){ // Test Tag Name
+			case "INPUT": // Is Flexible Input Tag
+			switch(_CLobj.type){ // Test Input Types
+				case "button":
+				case "submit":
+				case "reset": // Are Button Types
+					return _CLobj.value;
+			}
+		break; // OR
+			case "IMG": // Is Image
+				return _CLobj.alt;
+		break; // OR
+			default: // Is Not A Special Condition, Get Both Parent & Element innerText
+			switch(_CLobj.parentElement.tagName){ // Depends On Tag Type
+				case null: // Ignore Parent Node When Tag Matches These Types
+				case "HTML":
+				case "BODY":
+				case "IFRAME":
+					return _CLobj.innerText;
+			break; // Else:
+				default: // Any Other Element Type Is Valid Parent
+					return _CLobj.parentElement.innerText;
+			}
+		}
 	}
 }

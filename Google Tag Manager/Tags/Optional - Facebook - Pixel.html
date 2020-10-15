@@ -23,6 +23,7 @@
 
 // Facebook Pixel Code
 if(typeof window.fbq!="function"){ // Already Declared (or Initialising Too?)
+	// Facebook Pixel: Start ================================================
     !function(f,b,e,v,n,t,s) { // Nope, Declare Pixel Design (Minified After This Point To Match Facebook Design)
         if(f.fbq)return; // If Already Declared Then Exit
         n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}; // Call The fbq() Function To Populate The Queue
@@ -40,7 +41,7 @@ if(typeof window.fbq!="function"){ // Already Declared (or Initialising Too?)
         ,document // Container Document
         ,'script' // Call Method Element Type
         ,'https://connect.facebook.net/en_US/fbevents.js' // API Controller URL
-    );
+    ); // Facebook Pixel: END ==============================================
     // Initialise Function Call
     fbq('init',"{{Facebook App ID}}"); // Initialise Facebook App ID
     fbq('track','PageView'); // Always Call A Simple PageView Event
