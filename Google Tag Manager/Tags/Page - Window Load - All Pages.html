@@ -38,8 +38,14 @@ document.addEventListener("touchstart", function(event){
 		dataLayer.push({'event':'lostfocus'});
 	},{once:true});  // Fire Only Once
 },{once:true});  // Fire Only Once
-
-// Let GTM Know We Have Bound Everything!
+// Set Page Level Storage (if Availible)
+switch(typeof window.sessionStorage){case null: // Ignore
+break;case "object": // Session Storage Enabled
+	sessionStorage.setItem('gtm.clickCount',0); // Reset Page Level Counter
+	document.addEventListener("click", function(event){ // Count Clicks
+		sessionStorage.setItem('gtm.clickCount',parseInt(sessionStorage.getItem('gtm.clickCount'))+1); // Count Click Events
+	});
+}; // Let GTM Know We Have Bound Everything!
 dataLayer.push({'event':'onload'});
 
 // Detect When onLoad is onLoaded!

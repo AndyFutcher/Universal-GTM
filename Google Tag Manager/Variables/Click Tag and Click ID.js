@@ -1,4 +1,3 @@
-<script>
 /* ============================================================================
     SuccessEvents is a free and open-source data layer designed to streamline
     & enhance the accuracy of your website digital analytics and PWA tracking.
@@ -21,22 +20,22 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-// Pass Page Dependencies To GA
-if (window.performance) { // Performance Supported
-	var resource=0,resources=performance.getEntriesByType("resource"),resourceVar='',resourceValue=0,resourceLabel={{Navigation Type}};
-	for (resource=0;resource<resources.length;resource++) {
-		resourceVar=resources[resource].name.split(';')[0]; // Strip Code/BASE64
-		resourceVar=resourceVar.split('?')[0]; // Strip Parameters
-		resourceValue=resources[resource].responseEnd-resources[resource].startTime;
-		if (resourceValue>20) { // Not Cached (Greater Than 20ms)
-			dataLayer.push({
-				 'event':'timing'
-				,'EventCategory':resources[resource].initiatorType
-				,'EventVar':resourceVar
-				,'EventValue':parseInt(resourceValue)
-				,'EventLabel':resourceLabel
-			});
+function(){ // Collect Clicked Parent Rendered Text
+	var _CLobj={{Click Element}}; // Store Clicked Object
+
+	if(	// Validate Object
+		  (typeof _CLobj=="object") // Is Declared
+		&&(typeof _CLobj.tagName=="string") // Has Tag Name
+	){	// Were Good To Query
+		var _CLtag=_CLobj.tagName.toLowerCase(); // Get Tag Name
+		var _CLid=_CLobj.id; // Get Tag Name
+		if(_CLid){_CLid='#'+_CLid;}; // Prefix ID Selector
+		switch(_CLtag){ // Test Tag Name
+			case "input": // Is Flexible Input Tag
+				return _CLtag+'[type='+_CLobj.type+']'+_CLid; // Return CSS Style Tag Name
+		break; // OR
+			default: // Is Not A Special Condition
+				return _CLtag+_CLid; // Return Tag Type
 		}
 	}
 }
-</script>

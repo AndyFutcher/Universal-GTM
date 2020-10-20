@@ -33,11 +33,11 @@ function(){ // Collect Clicked Parent Rendered Text
 				case "button":
 				case "submit":
 				case "reset": // Are Button Types
-					return _CLobj.value;
+					return _CLobj.value.substr(0,100);
 			}
 		break; // OR
 			case "IMG": // Is Image
-				return _CLobj.alt;
+				return _CLobj.alt.substr(0,100);
 		break; // OR
 			default: // Is Not A Special Condition, Get Both Parent & Element innerText
 			switch(_CLobj.parentElement.tagName){ // Depends On Tag Type
@@ -45,10 +45,10 @@ function(){ // Collect Clicked Parent Rendered Text
 				case "HTML":
 				case "BODY":
 				case "IFRAME":
-					return _CLobj.innerText;
+					return _CLobj.innerText.substr(0,100);
 			break; // Else:
 				default: // Any Other Element Type Is Valid Parent
-					return _CLobj.parentElement.innerText;
+					return _CLobj.parentElement.innerText.substr(0,100);
 			}
 		}
 	}

@@ -1,4 +1,3 @@
-<script>
 /* ============================================================================
     SuccessEvents is a free and open-source data layer designed to streamline
     & enhance the accuracy of your website digital analytics and PWA tracking.
@@ -21,22 +20,17 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-// Pass Page Dependencies To GA
-if (window.performance) { // Performance Supported
-	var resource=0,resources=performance.getEntriesByType("resource"),resourceVar='',resourceValue=0,resourceLabel={{Navigation Type}};
-	for (resource=0;resource<resources.length;resource++) {
-		resourceVar=resources[resource].name.split(';')[0]; // Strip Code/BASE64
-		resourceVar=resourceVar.split('?')[0]; // Strip Parameters
-		resourceValue=resources[resource].responseEnd-resources[resource].startTime;
-		if (resourceValue>20) { // Not Cached (Greater Than 20ms)
-			dataLayer.push({
-				 'event':'timing'
-				,'EventCategory':resources[resource].initiatorType
-				,'EventVar':resourceVar
-				,'EventValue':parseInt(resourceValue)
-				,'EventLabel':resourceLabel
-			});
-		}
+function(){ // Count The Number Of Times Clicks
+	// Check For Any Special Conditions First
+	switch({{Container Version}}){case "QUICK_PREVIEW": // Found Returning "User"
+		return -1; // Not Availible In GTM Preview Mode
 	}
+
+	// Set Page Level Storage (if Availible)
+	if(typeof window.sessionStorage==="object"){ // Session Storage Enabled
+		return parseInt(sessionStorage.getItem('gtm.clickCount'));
+	};
+
+	// Not Availible
+	return -1;
 }
-</script>
