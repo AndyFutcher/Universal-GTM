@@ -34,14 +34,24 @@ function(){ // Collect Clicked Parent Rendered Text
 		if(	// Validate Object
 			  (typeof _CLobj=="object") // Is Declared
 			&&(typeof _CLobj.tagName=="string") // Has Tag Name
-		){	// Were Good To Query
+		){	// Were Good, Build Solution
 			var _CLtag=_CLobj.tagName.toLowerCase(); // Get Tag Name
-			var _CLid=_CLobj.id; // Get Tag Name
-			if(_CLid){_CLid='#'+_CLid;}; // Prefix ID Selector
+			var _CLid=_CLobj.id.toLowerCase(); // Get Tag ID
+			// Special Conditions
+			switch(_CLid){case null:case '': _CLid=''; // ID is Empty
+			break;case _CLtag: _CLid='';  // Same as ID
+			break;default: _CLid='#'+_CLid;  // Prefix ID Selector
+			}; // Populate Output
 			switch(_CLtag){ // Test Tag Name
+				case null: // Find Common Root Elements
+				case "html":
+				case "body":
+				case "iframe": // Parent is Root
+					return 'body > '+_CLoutput; // Return Early
+			break;
 				case "input": // Is Flexible Input Tag
 					if(_CLdepth){_CLoutput=' > '+_CLoutput}; // Has Child, Add Parent
-					_CLoutput=_CLtag+'[type='+_CLobj.type+']'+_CLid+_CLoutput; // Return CSS Style Tag Name
+					_CLoutput=_CLtag+'[type='+_CLobj.type.toLowerCase()+']'+_CLid+_CLoutput; // Return CSS Style Tag Name
 			break; // OR
 				default: // Is Not A Special Condition
 					if(_CLdepth){_CLoutput=' > '+_CLoutput}; // Has Child, Add Parent
@@ -51,5 +61,5 @@ function(){ // Collect Clicked Parent Rendered Text
 	};
 
 	// Return Final Output
-	return _CLoutput;
+	return 'body > … > '+_CLoutput;
 }

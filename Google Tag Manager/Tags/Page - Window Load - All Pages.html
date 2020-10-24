@@ -41,10 +41,13 @@ document.addEventListener("touchstart", function(event){
 // Set Page Level Storage (if Availible)
 switch(typeof window.sessionStorage){case null: // Ignore
 break;case "object": // Session Storage Enabled
-	sessionStorage.setItem('gtm.clickCount',0); // Reset Page Level Counter
-	document.addEventListener("click", function(event){ // Count Clicks
-		sessionStorage.setItem('gtm.clickCount',parseInt(sessionStorage.getItem('gtm.clickCount'))+1); // Count Click Events
-	});
+	var _CL={'icks': {{Default - Cookie - Click Count}} }; // Get Variables
+	if(_CL['icks']){ // Does Click Count Exisit?
+		sessionStorage.setItem(_CL['icks'],0); // Reset Page Level Counter
+		document.addEventListener("click", function(event){ // Count Clicks
+			sessionStorage.setItem(_CL['icks'],parseInt(sessionStorage.getItem(_CL['icks']))+1); // Count Click Events
+		});
+	}
 }; // Let GTM Know We Have Bound Everything!
 dataLayer.push({'event':'onload'});
 

@@ -29,8 +29,14 @@ function(){ // Collect Clicked Tag Type
 	){	// Were Good To Query
 		var _CLtag=_CLobj.tagName.toLowerCase(); // Get Tag Name
 		switch(_CLtag){ // Test Tag Name
+			case null: // Find Common Root Elements
+			case "iframe":
+			case "html":
+			case "body": // Parent is Root
+				return 'body'; // Return Early
+		break;
 			case "input": // Is Flexible Input Tag
-				return _CLtag+'[type='+_CLobj.type+']'; // Return CSS Style Tag Name
+				return _CLtag+'[type='+_CLobj.type.toLowerCase()+']'; // Return CSS Style Tag Name
 		break; // OR
 			default: // Is Not A Special Condition
 				return _CLtag; // Return Tag Type

@@ -26,10 +26,14 @@ function(){ // Count The Number Of Times Clicks
 		return -1; // Not Availible In GTM Preview Mode
 	}
 
-	// Set Page Level Storage (if Availible)
-	if(typeof window.sessionStorage==="object"){ // Session Storage Enabled
-		return parseInt(sessionStorage.getItem('gtm.clickCount'));
-	};
+	// Get Page Level Storage (if Availible)
+	switch(typeof window.sessionStorage){case null: // Ignore
+	break;case "object": // Session Storage Enabled
+		var _CL={'icks': {{Default - Cookie - Click Count}} }; // Get Variables
+		if(_CL['icks']){ // Does Click Count Exisit?
+			return parseInt(sessionStorage.getItem(_CL['icks']));
+		}
+	}
 
 	// Not Availible
 	return -1;

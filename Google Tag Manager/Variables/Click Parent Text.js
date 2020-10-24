@@ -27,24 +27,24 @@ function(){ // Collect Clicked Parent Rendered Text
 		  (typeof _CLobj=="object") // Is Declared
 		&&(typeof _CLobj.tagName=="string") // Has Tag Name
 	){	// Were Good To Query
-		switch(_CLobj.tagName){ // Test Tag Name
-			case "INPUT": // Is Flexible Input Tag
-			switch(_CLobj.type){ // Test Input Types
+		switch(_CLobj.tagName.toLowerCase()){ // Test Tag Name
+			case "input": // Is Flexible Input Tag
+			switch(_CLobj.type.toLowerCase()){ // Test Input Types
 				case "button":
 				case "submit":
 				case "reset": // Are Button Types
 					return _CLobj.value.substr(0,100);
 			}
 		break; // OR
-			case "IMG": // Is Image
+			case "img": // Is Image
 				return _CLobj.alt.substr(0,100);
 		break; // OR
 			default: // Is Not A Special Condition, Get Both Parent & Element innerText
-			switch(_CLobj.parentElement.tagName){ // Depends On Tag Type
+			switch(_CLobj.parentElement.tagName.toLowerCase()){ // Depends On Tag Type
 				case null: // Ignore Parent Node When Tag Matches These Types
-				case "HTML":
-				case "BODY":
-				case "IFRAME":
+				case "html":
+				case "body":
+				case "iframe":
 					return _CLobj.innerText.substr(0,100);
 			break; // Else:
 				default: // Any Other Element Type Is Valid Parent

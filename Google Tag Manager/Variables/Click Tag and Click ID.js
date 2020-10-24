@@ -28,11 +28,11 @@ function(){ // Collect Clicked Parent Rendered Text
 		&&(typeof _CLobj.tagName=="string") // Has Tag Name
 	){	// Were Good To Query
 		var _CLtag=_CLobj.tagName.toLowerCase(); // Get Tag Name
-		var _CLid=_CLobj.id; // Get Tag Name
+		var _CLid=_CLobj.id.toLowerCase(); // Get Tag Name
 		if(_CLid){_CLid='#'+_CLid;}; // Prefix ID Selector
 		switch(_CLtag){ // Test Tag Name
 			case "input": // Is Flexible Input Tag
-				return _CLtag+'[type='+_CLobj.type+']'+_CLid; // Return CSS Style Tag Name
+				return _CLtag+'[type='+_CLobj.type.toLowerCase()+']'+_CLid; // Return CSS Style Tag Name
 		break; // OR
 			default: // Is Not A Special Condition
 				return _CLtag+_CLid; // Return Tag Type
