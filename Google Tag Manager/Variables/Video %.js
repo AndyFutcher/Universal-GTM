@@ -20,32 +20,6 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Visitor Scale
-	-100:cyber threat,-90:bad actor,-59:unknown access point,-39:unknown browser,-19:unknown bot,-9:known bot,-4:safe bot,0:unknown,1:hit,2:viewer,5:visitor,10:user,20:active user,30:prospect,40:quotation,50:qualified,60:customer,70:in market,80:loyal,85:advocate,90:influencer,100:employee
-	/* Declare Scale Values
-	VSscale={
-		 '-100':"cyber threat"  // or Staff/Employee/Employer
-		 '-90':"bad actor"
-		 '-59':"unknown access point"
-		,'-39':"unknown browser"
-		,'-19':"unknown bot"
-		,'-9':"known bot"
-		,'-4':"safe bot"
-		,'0':"unknown"
-		,'1':"hit"
-		,'2':"viewer"
-		,'5':"visitor"
-		,'10':"user"
-		,'20':"active user"
-		,'30':"prospect"
-		,'40':"quotation"
-		,'50':"qualified"
-		,'60':"customer"
-		,'70':"in market"
-		,'80':"loyal"
-		,'85':"advocate"
-		,'90':"influencer"
-		,'100':"employee"
-	}; */
-
+function(){ // Convert Percent to Percentage Decimal
+	returns ({{Video Percent}}/100);
 }

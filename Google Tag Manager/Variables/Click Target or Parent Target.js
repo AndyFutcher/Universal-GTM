@@ -20,32 +20,18 @@
 	contact me at andy@successevents.dev
 ============================================================================ */
 
-function(){ // Visitor Scale
-	-100:cyber threat,-90:bad actor,-59:unknown access point,-39:unknown browser,-19:unknown bot,-9:known bot,-4:safe bot,0:unknown,1:hit,2:viewer,5:visitor,10:user,20:active user,30:prospect,40:quotation,50:qualified,60:customer,70:in market,80:loyal,85:advocate,90:influencer,100:employee
-	/* Declare Scale Values
-	VSscale={
-		 '-100':"cyber threat"  // or Staff/Employee/Employer
-		 '-90':"bad actor"
-		 '-59':"unknown access point"
-		,'-39':"unknown browser"
-		,'-19':"unknown bot"
-		,'-9':"known bot"
-		,'-4':"safe bot"
-		,'0':"unknown"
-		,'1':"hit"
-		,'2':"viewer"
-		,'5':"visitor"
-		,'10':"user"
-		,'20':"active user"
-		,'30':"prospect"
-		,'40':"quotation"
-		,'50':"qualified"
-		,'60':"customer"
-		,'70':"in market"
-		,'80':"loyal"
-		,'85':"advocate"
-		,'90':"influencer"
-		,'100':"employee"
-	}; */
+function(){ // Collect Parent or Element HREF
+	_CL={clicked: {{Click Element}}.target // The Clicked Element
+		,parent: {{Click Element}}.parentElement.target // ...and Its Parent
+	};
 
+	// Determine Valid Return by Heirarchy
+    if((typeof _CL['clicked']=="string")&&(_CL['clicked'])){ // Has Valid Click Value
+		return _CL['clicked']; // Return Click Value
+    }else if((typeof _CL['parent']=="string")&&(_CL['parent'])){ // Has Valid Parent Value
+		return _CL['parent']; // Return Parent Value
+	}
+
+	// Else Return Empty
+	return "";
 }
