@@ -28,7 +28,11 @@ if (window.performance) { // Performance Supported
 		resourceVar=resources[resource].name.split(';')[0]; // Strip Code/BASE64
 		resourceVar=resourceVar.split('?')[0]; // Strip Parameters
 		resourceValue=resources[resource].responseEnd-resources[resource].startTime;
-		if (resourceValue>20) { // Not Cached (Greater Than 20ms)
+		resourceType=resources[resource].initiatorType;
+		if(	// Validate Telemetry
+			  (resourceValue>20) // Not Cached (Greater Than 20ms)
+			&&(resourceType!='beacon') // Exclude Beacon Data
+		){	// Push GTM _Event
 			dataLayer.push({
 				 'event':'timing'
 				,'EventCategory':resources[resource].initiatorType
