@@ -1,0 +1,30 @@
+{
+    "workbench.colorTheme": "Visual Studio Dark"
+    ,"workbench.colorCustomizations": {
+        "[*Dark*]": {
+            "editor.background": "#202428"
+            ,"sideBar.background": "#202428"
+            ,"minimap.background": "#17181a"
+            ,"scrollbarSlider.background": "#00000090"
+        }
+    },"editor.tokenColorCustomizations": {
+        "[*Dark*]": {
+             "semanticHighlighting": true
+            ,"comments": "#616468"
+            ,"functions": "#ffffff"
+            ,"keywords": "#ffe000"
+            ,"variables": "#54b0e8"
+            ,"numbers": "#a25049"
+            ,"strings": "#9bff3c"
+            ,"types": "#FF0000"
+        }
+    },"editor.semanticTokenColorCustomizations": {
+        "[*Dark*]": {
+            "enabled": true
+            ,"rules": {  // Comments
+                 "*.comment": { "bold": false }
+                ,"*.functions": { "bold": true }
+            }
+        }
+    }
+}
