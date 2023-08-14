@@ -1,5 +1,5 @@
 /* ============================================================================
-    SuccessEvents is a free and open-source data layer designed to streamline
+    Universal-GTM is a free and open-source data layer designed to streamline
     & enhance the accuracy of your website digital analytics and PWA tracking.
     Copyright (C) 2020 Andy Xelancer Futcher
 
@@ -16,8 +16,8 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	See more documentation at SuccessEvents.dev, for more information please
-	contact me at andy@successevents.dev
+	See more documentation at andyfutcher.com/universal-gtm, or for more information
+	reach out to me at andyfutcher.com
 ============================================================================ */
 
 function(){ // Visitor Scale
